@@ -11,9 +11,10 @@ async function bootstrap() {
     transform: true, // Transforma os tipos primitivos
   }));
 
+  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
   // Habilitar CORS
   app.enableCors({
-    origin: 'http://localhost:3000', // URL do seu frontend Next.js
+    origin: frontendUrl,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
