@@ -1,98 +1,100 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# WVision Cine Manager - Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API RESTful desenvolvida para ser o backend do sistema de gerenciamento de cinemas WVision Cine Manager. A aplicação gerencia filmes, salas, sessões e ingressos, fornecendo os endpoints necessários para a operação completa do sistema.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Este projeto foi construído utilizando as seguintes tecnologias:
+- **NestJS**: Um framework Node.js progressivo para construir aplicações de backend eficientes e escaláveis.
+- **Prisma**: Um ORM de próxima geração para Node.js e TypeScript.
+- **PostgreSQL**: Um poderoso sistema de banco de dados relacional de código aberto.
+- **TypeScript**: Superset de JavaScript que adiciona tipagem estática.
 
-## Description
+## Funcionalidades
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+-   Gerenciamento completo (CRUD) de **Filmes**.
+-   Gerenciamento completo (CRUD) de **Salas de Cinema**.
+-   Gerenciamento completo (CRUD) de **Sessões**, com relacionamento entre Filmes e Salas.
+-   Gerenciamento completo (CRUD) de **Ingressos** para as sessões.
+-   Validação de dados de entrada usando DTOs e `class-validator`.
 
-## Project setup
+## Pré-requisitos
 
+Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
+- [Node.js](https://nodejs.org/en/) (versão 18.x ou superior recomendada)
+- [NPM](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+- Uma instância do [PostgreSQL](https://www.postgresql.org/download/) rodando localmente ou na nuvem.
+
+## Guia de Instalação e Execução
+
+Siga os passos abaixo para configurar e executar o projeto em seu ambiente de desenvolvimento.
+
+**1. Clone o repositório**
 ```bash
-$ npm install
+git clone [https://github.com/seu-usuario/wvision-cine-manager-backend.git](https://github.com/seu-usuario/wvision-cine-manager-backend.git)
+cd wvision-cine-manager-backend
 ```
 
-## Compile and run the project
-
+**2. Instale as dependências**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
+**3. Configure as Variáveis de Ambiente**
+Crie um arquivo `.env` na raiz do projeto, copiando o exemplo de `.env.example` (se houver) ou usando o modelo abaixo. Substitua os valores pelos dados de acesso ao seu banco de dados PostgreSQL.
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```env
+# URL de conexão do seu banco de dados PostgreSQL
+DATABASE_URL="postgresql://USUARIO:SENHA@HOST:PORTA/NOME_DO_BANCO?schema=public"
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+**4. Execute as Migrações do Banco de Dados**
+Este comando irá criar todas as tabelas necessárias no seu banco de dados, com base no schema do Prisma.
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npx prisma migrate dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+**5. Execute a Aplicação**
+O servidor de desenvolvimento será iniciado e ficará observando alterações nos arquivos.
+```bash
+npm run start:dev
+```
+Por padrão, a aplicação estará disponível em `http://localhost:3001`.
 
-## Resources
+## Scripts Disponíveis
 
-Check out a few resources that may come in handy when working with NestJS:
+-   `npm run start:dev`: Inicia a aplicação em modo de desenvolvimento com watch mode.
+-   `npm run build`: Compila o projeto TypeScript para JavaScript.
+-   `npm run start:prod`: Inicia a aplicação em modo de produção (requer `npm run build` antes).
+-   `npm test`: Roda os testes unitários.
+-   `npm run test:e2e`: Roda os testes end-to-end.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Endpoints da API
 
-## Support
+A API está estruturada em torno dos seguintes recursos principais:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+-   `GET, POST, PATCH, DELETE /filmes`
+-   `GET, POST, PATCH, DELETE /salas`
+-   `GET, POST, PATCH, DELETE /sessoes`
+-   `GET, POST, DELETE /ingressos`
 
-## Stay in touch
+## Deploy em Produção
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Para fazer o deploy da aplicação em um ambiente de produção, siga estes passos:
 
-## License
+1.  **Build do Projeto**: Compile os arquivos TypeScript.
+    ```bash
+    npm run build
+    ```
+2.  **Migrações do Prisma**: Em um ambiente de produção, use o comando `deploy` para aplicar as migrações existentes.
+    ```bash
+    npx prisma migrate deploy
+    ```
+3.  **Iniciar o Servidor**: Use o script de produção para iniciar o servidor.
+    ```bash
+    npm run start:prod
+    ```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+É crucial configurar as variáveis de ambiente (`DATABASE_URL`, `PORT`, etc.) na sua plataforma de hospedagem (Ex: Render, Railway, AWS).
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT.
